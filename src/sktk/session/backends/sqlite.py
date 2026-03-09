@@ -48,25 +48,29 @@ class SQLiteHistory(ConversationHistory):
             # accesses the connection at a time.  WAL mode allows concurrent
             # readers if needed in the future.
             conn = sqlite3.connect(self._db_path, check_same_thread=False)
-            conn.execute("PRAGMA journal_mode=WAL")
-            conn.execute("""
-                CREATE TABLE IF NOT EXISTS messages (
-                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    session_id TEXT NOT NULL,
-                    role TEXT NOT NULL,
-                    content TEXT NOT NULL,
-                    metadata TEXT DEFAULT '{}',
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            try:
+                conn.execute("PRAGMA journal_mode=WAL")
+                conn.execute("""
+                    CREATE TABLE IF NOT EXISTS messages (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT,
+                        session_id TEXT NOT NULL,
+                        role TEXT NOT NULL,
+                        content TEXT NOT NULL,
+                        metadata TEXT DEFAULT '{}',
+                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                    )
+                """)
+                conn.execute("CREATE INDEX IF NOT EXISTS idx_session ON messages(session_id)")
+                conn.commit()
+                cursor = conn.execute(
+                    "SELECT COUNT(*) FROM messages WHERE session_id = ?",
+                    (session_id,),
                 )
-            """)
-            conn.execute("CREATE INDEX IF NOT EXISTS idx_session ON messages(session_id)")
-            conn.commit()
-            cursor = conn.execute(
-                "SELECT COUNT(*) FROM messages WHERE session_id = ?",
-                (session_id,),
-            )
-            count = cursor.fetchone()[0]
-            return conn, count
+                count = cursor.fetchone()[0]
+                return conn, count
+            except Exception:
+                conn.close()
+                raise
 
         # Offload blocking sqlite3 calls to a thread to avoid stalling the event loop
         self._conn, self._count = await asyncio.to_thread(_init)

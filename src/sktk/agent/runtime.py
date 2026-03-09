@@ -459,13 +459,16 @@ class AgentRuntime:
         if agent.service is not None and hasattr(agent.service, "stream_with_metadata"):
             messages = await self.build_messages(prompt)
             merged = self._build_stream_kwargs(kwargs)
+            loop = asyncio.get_running_loop()
+            deadline = (loop.time() + timeout) if timeout is not None else None
             stream_obj = await self.await_with_timeout(
                 maybe_await(agent.service.stream_with_metadata(messages, **merged)),
                 timeout=timeout,
             )
             stream, metadata = self.unpack_stream_result(stream_obj)
             self.record_response_metadata(metadata)
-            async for chunk in self.iterate_stream_with_timeout(stream, timeout=timeout):
+            remaining = (deadline - loop.time()) if deadline is not None else None
+            async for chunk in self.iterate_stream_with_timeout(stream, timeout=remaining):
                 text, chunk_meta = self.coerce_stream_chunk(chunk)
                 if chunk_meta:
                     self.record_response_metadata({**self._last_response_metadata, **chunk_meta})

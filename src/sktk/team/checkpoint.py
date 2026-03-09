@@ -498,7 +498,8 @@ class _SQLiteBackend:
             await _emit_metrics(self._metrics_hook, "save_sqlite", {"workflow": workflow_id})
 
     async def trim(self, workflow_id: str, max_checkpoints: int) -> None:
-        db = await self._ensure_db()
+        async with self._lock:
+            db = await self._ensure_db()
         await _execute_with_retry(
             lambda: db.execute(
                 "DELETE FROM checkpoints WHERE workflow_id = ? AND id NOT IN "
