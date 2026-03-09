@@ -15,7 +15,9 @@ class ConversationHistory(ABC):
         ...
 
     @abstractmethod
-    async def get(self, limit: int | None = None, roles: list[str] | None = None) -> list[dict[str, Any]]:
+    async def get(
+        self, limit: int | None = None, roles: list[str] | None = None
+    ) -> list[dict[str, Any]]:
         """Return messages, optionally filtered by role and limited to the N most recent."""
         ...
 

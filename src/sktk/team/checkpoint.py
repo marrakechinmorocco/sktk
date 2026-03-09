@@ -579,7 +579,9 @@ class _SQLiteSyncAdapter:
         self._conn = conn
         self._executor = executor
 
-    async def execute(self, sql: str, params: tuple[Any, ...] | list[Any] = ()) -> _SQLiteCursorAdapter:
+    async def execute(
+        self, sql: str, params: tuple[Any, ...] | list[Any] = ()
+    ) -> _SQLiteCursorAdapter:
         loop = asyncio.get_running_loop()
         cursor = await loop.run_in_executor(self._executor, self._conn.execute, sql, params)
         return _SQLiteCursorAdapter(cursor, self._executor)

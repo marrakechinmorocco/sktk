@@ -98,7 +98,9 @@ class SQLiteHistory(ConversationHistory):
             await asyncio.to_thread(_append)
             self._count += 1
 
-    async def get(self, limit: int | None = None, roles: list[str] | None = None) -> list[dict[str, Any]]:
+    async def get(
+        self, limit: int | None = None, roles: list[str] | None = None
+    ) -> list[dict[str, Any]]:
         """Query messages, optionally filtered by role and limited to the N most recent."""
         sid = self._session_id
         safe_limit = int(limit) if limit is not None else None

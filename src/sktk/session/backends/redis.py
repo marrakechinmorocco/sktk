@@ -52,7 +52,9 @@ class RedisHistory(ConversationHistory):
             await self._client.rpush(self._key, message)
             self._count += 1
 
-    async def get(self, limit: int | None = None, roles: list[str] | None = None) -> list[dict[str, Any]]:
+    async def get(
+        self, limit: int | None = None, roles: list[str] | None = None
+    ) -> list[dict[str, Any]]:
         """Retrieve messages, optionally filtered by role and limited to the N most recent.
 
         The lock is held across client initialisation, the lrange call,

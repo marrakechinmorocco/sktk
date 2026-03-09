@@ -32,7 +32,9 @@ class InMemoryHistory(ConversationHistory):
         async with self._lock:
             self._messages.append({"role": role, "content": content, "metadata": metadata or {}})
 
-    async def get(self, limit: int | None = None, roles: list[str] | None = None) -> list[dict[str, Any]]:
+    async def get(
+        self, limit: int | None = None, roles: list[str] | None = None
+    ) -> list[dict[str, Any]]:
         """Return deep-copied messages, optionally filtered and limited."""
         async with self._lock:
             messages = self._messages
